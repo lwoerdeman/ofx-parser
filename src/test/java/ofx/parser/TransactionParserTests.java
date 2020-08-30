@@ -42,4 +42,25 @@ public class TransactionParserTests {
         TransactionParser parser = new TransactionParser();
         Assertions.assertEquals(transaction, parser.parse(tagString));
     }
+
+    @Test
+    public void testThatMultilineTransactionParsed() {
+        String transaction = "<STMTTRN>\n" +
+                "<TRNTYPE>CREDIT\n" +
+                "<DTPOSTED>20200825120000[0:GMT]\n" +
+                "<TRNAMT>0.53\n" +
+                "<FITID>2020082524204290237300903128734\n" +
+                "<NAME>SPOTIFY STMT CREDIT TRXN\n" +
+                "</STMTTRN>";
+        StatementTransaction expected = new StatementTransaction(
+                "CREDIT",
+                OffsetDateTime.of(2020,8, 25, 12, 0, 0, 0, ZoneOffset.UTC),
+                new BigDecimal(".53"),
+                "SPOTIFY STMT CREDIT TRXN",
+                "2020082524204290237300903128734",
+                null
+        );
+        TransactionParser parser = new TransactionParser();
+        Assertions.assertEquals(expected, parser.parse(transaction));
+    }
 }

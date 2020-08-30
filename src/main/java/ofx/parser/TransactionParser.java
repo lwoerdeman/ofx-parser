@@ -15,6 +15,7 @@ public class TransactionParser {
     }
 
     static List<String> tags(String tagString) {
+        tagString = tagString.replace("\n", "").replace("\r", "");
         List<String> tags = new ArrayList<>();
         StringBuilder builder = null;
         for (char c : tagString.toCharArray()) {
@@ -34,7 +35,7 @@ public class TransactionParser {
     }
 
     public StatementTransaction parse(String transaction) {
-        Pattern stmt = Pattern.compile("^<STMTTRN>(.*?)</STMTTRN>$");
+        Pattern stmt = Pattern.compile("^<STMTTRN>(.*?)</STMTTRN>$", Pattern.DOTALL);
         Matcher m = stmt.matcher(transaction);
         if (!m.matches())
             throw new IllegalArgumentException("This is not a statement transaction");

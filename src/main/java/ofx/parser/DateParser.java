@@ -10,15 +10,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DateParser {
-    private static final Pattern tz = Pattern.compile("^.*\\[[-+](\\d)(\\d?)(:.*)?]$");
+    private static final Pattern tz = Pattern.compile("^.*\\[([-+]?)(\\d)(\\d?)(:.*)?]$");
 
     public static OffsetDateTime parse(String datetime) {
         Matcher m = tz.matcher(datetime);
         if (m.matches()) {
-            if (m.group(2).equals("")) {
+            if ("".equals(m.group(1))) {
                 datetime = new StringBuilder(datetime)
-                        .replace(m.start(1), m.end(1), "0"+m.group(1))
+                        .replace(m.start(1), m.end(1), "-")
                         .toString();
+                m = tz.matcher(datetime);
+            }
+        }
+        if (m.matches()) {
+            if ("".equals(m.group(3))) {
+                datetime = new StringBuilder(datetime)
+                        .replace(m.start(2), m.end(2), "0"+m.group(2))
+                        .toString();
+
             }
         }
         DateTimeFormatter test = new DateTimeFormatterBuilder()
@@ -36,7 +45,7 @@ public class DateParser {
                 .optionalEnd()
                 .optionalStart()
                 .appendLiteral("[")
-                .appendOffset("+H", "+0")
+                .appendOffset("+HH", "0")
                 .optionalStart()
                 .appendLiteral(":")
                 .appendZoneText(TextStyle.SHORT)

@@ -104,6 +104,22 @@ public class DateParserTests {
     }
 
     @Test
+    public void testFullDateTimePassesNoMillisecondsGMT() {
+        String datetime = "20200825120000[0:GMT]";
+        OffsetDateTime expected = OffsetDateTime.of(
+                2020,
+                8,
+                25,
+                12,
+                0,
+                0,
+                0,
+                ZoneOffset.ofHours(0)
+        );
+        Assertions.assertEquals(expected.toInstant(), DateParser.parse(datetime).toInstant());
+    }
+
+    @Test
     public void testDateOnlyPasses() {
         String datetime = "19961005";
         OffsetDateTime expected = OffsetDateTime.of(
