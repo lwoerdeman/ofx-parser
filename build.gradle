@@ -50,3 +50,9 @@ allprojects {
     }
 }
 
+project(':ofx-server') {
+    dependencies {
+        implementation project(':ofx-lib')
+    }
+}
+

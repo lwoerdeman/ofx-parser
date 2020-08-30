@@ -1,9 +1,13 @@
 package ofx.message;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import ofx.builder.TransactionBuilder;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
+@JsonDeserialize(builder = TransactionBuilder.class)
 public class StatementTransaction {
     private final String type;
     private final OffsetDateTime datePosted;

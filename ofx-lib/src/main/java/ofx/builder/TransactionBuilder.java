@@ -1,14 +1,14 @@
 package ofx.builder;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import ofx.message.StatementTransaction;
 import ofx.parser.DateParser;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.regex.Pattern;
 
+@JsonPOJOBuilder(withPrefix = "")
 public class TransactionBuilder {
-    private static final Pattern tz = Pattern.compile("^.*\\[[-+](\\d)(\\d?)(:.*)?]$");
     private String type;
     private OffsetDateTime datePosted;
     private BigDecimal amount;
