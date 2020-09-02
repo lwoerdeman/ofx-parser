@@ -23,6 +23,9 @@ jobs:
       run:
         shell: bash
         working-directory: terraform
+        
+    env:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
