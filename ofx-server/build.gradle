@@ -80,7 +80,7 @@ jib {
         image = 'gcr.io/myfi-01/app-server'
         auth {
             username = '_json_key'
-            password = new String(System.getenv("GOOGLE_CREDENTIALS").decodeBase64())
+            password = System.getenv("GOOGLE_CREDENTIALS")
         }
     }
 }
