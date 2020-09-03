@@ -1,3 +1,7 @@
 micronaut:
   application:
     name: ofxServer
+
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
