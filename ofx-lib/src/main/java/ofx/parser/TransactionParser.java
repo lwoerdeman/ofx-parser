@@ -61,7 +61,7 @@ public class TransactionParser {
                     builder.amount(value);
                     break;
                 case "DTPOSTED":
-                    builder.datePosted(value);
+                    builder.datePosted(DateParser.parse(value));
                     break;
                 case "FITID":
                     builder.fitId(value);

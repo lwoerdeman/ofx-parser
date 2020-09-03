@@ -24,8 +24,8 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder datePosted(String datePosted) {
-        this.datePosted = DateParser.parse(datePosted);
+    public TransactionBuilder datePosted(OffsetDateTime datePosted) {
+        this.datePosted = datePosted;
         return this;
     }
 

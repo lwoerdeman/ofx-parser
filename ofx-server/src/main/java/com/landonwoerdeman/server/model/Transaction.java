@@ -1,23 +1,20 @@
-package ofx.message;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import ofx.builder.TransactionBuilder;
+package com.landonwoerdeman.server.model;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
-//FI + <ACCTID> + <FITID> is unique
-@JsonDeserialize(builder = TransactionBuilder.class)
-public class StatementTransaction {
-    private final String type;
-    private final OffsetDateTime datePosted;
-    private final BigDecimal amount;
-    private final String payee;
-    private final String fitId;
-    private final String memo;
+public class Transaction {
+    private String type;
+    private Long datePosted;
+    private BigDecimal amount;
+    private String payee;
+    private String fitId;
+    private String memo;
 
-    public StatementTransaction(String type, OffsetDateTime datePosted, BigDecimal amount, String payee, String fitId, String memo) {
+    public Transaction() {
+    }
+
+    public Transaction(String type, Long datePosted, BigDecimal amount, String payee, String fitId, String memo) {
         this.type = type;
         this.datePosted = datePosted;
         this.amount = amount;
@@ -30,36 +27,60 @@ public class StatementTransaction {
         return type;
     }
 
-    public OffsetDateTime getDatePosted() {
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getDatePosted() {
         return datePosted;
+    }
+
+    public void setDatePosted(Long datePosted) {
+        this.datePosted = datePosted;
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     public String getPayee() {
         return payee;
+    }
+
+    public void setPayee(String payee) {
+        this.payee = payee;
     }
 
     public String getFitId() {
         return fitId;
     }
 
+    public void setFitId(String fitId) {
+        this.fitId = fitId;
+    }
+
     public String getMemo() {
         return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StatementTransaction that = (StatementTransaction) o;
-        return type.equals(that.type) &&
-                datePosted.equals(that.datePosted) &&
-                amount.equals(that.amount) &&
+        Transaction that = (Transaction) o;
+        return Objects.equals(type, that.type) &&
+                Objects.equals(datePosted, that.datePosted) &&
+                Objects.equals(amount, that.amount) &&
                 Objects.equals(payee, that.payee) &&
-                fitId.equals(that.fitId) &&
+                Objects.equals(fitId, that.fitId) &&
                 Objects.equals(memo, that.memo);
     }
 
@@ -70,7 +91,7 @@ public class StatementTransaction {
 
     @Override
     public String toString() {
-        return "StatementTransaction{" +
+        return "Transaction{" +
                 "type='" + type + '\'' +
                 ", datePosted=" + datePosted +
                 ", amount=" + amount +

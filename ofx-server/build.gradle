@@ -35,6 +35,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("io.micronaut.test:micronaut-test-junit5")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+
+    implementation('com.google.cloud:google-cloud-firestore:2.0.0')
 }
 
 test.classpath += configurations.developmentOnly
