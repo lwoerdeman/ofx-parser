@@ -27,3 +27,5 @@ jobs:
     - name: Deploy Docker Image to GCR
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: ./gradlew jib
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}

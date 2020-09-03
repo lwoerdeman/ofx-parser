@@ -9,9 +9,6 @@ on:
 
 jobs:
   build:
-    env:
-      GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +23,8 @@ jobs:
         run: ./gradlew build
       - name: Deploy Docker Image to GCR
         run: ./gradlew jib
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
       - name: Publish to GitHub Packages Apache Maven
         run: ./gradlew publish
         env:
